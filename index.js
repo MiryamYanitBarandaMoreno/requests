@@ -5,7 +5,10 @@ const app= express()
 
 //los callback pueden recibir tres parametros= req(recibe parametros de la URL) y res(funcion que permite dar respuesta)
 //Se pueden colocar varios segmentos separados con /, los : es para hacer dinamico 
-app.get('/:user/:password',(req, res)=>{
+//params, query y ball
+
+//METODO PARAMS
+app.get('/:user/:password',(req, res)=>{ //esto es un Endpoint el conjunto del metodo http , la ruta y la funcionalidad
     //http://localhost:3000/id el id es el segmento adicional que se puede recibir en el backend se puede tener varios
     //imprime lo que recibe
     //const params=req.params
@@ -14,16 +17,32 @@ app.get('/:user/:password',(req, res)=>{
     //respuesta en formato JSON
     //muestra lo recibido
     if (user==="miryam" && password==="123"){
-        res.json({msg: "Inicio de sesion exitoso"})
+        res.json({msg: "Sign in succesfully"})
         return
-    }res.json({msg: "Fallo en el usuario o contraseña"})
+    }res.json({msg: "Wrong user or password"})
 })
-//los navegadores solo soportan GET para utilizar estos metodos se necesita un emulador
+
+//METODO QUERY
+//query  http://localhost:3000/login?fullname=Miryam%20Baranda%Moreno %20 espacios
+//http://localhost:3000/login?user=miryam&password=123    &separa 
+//podemos pasar los datos sin importar el orden
+app.get('/:login',(req, res)=>{ //Endpoint el conjunto del metodo http , la ruta y la funcionalidad
+    const {user, password}=req.query
+    if(!user || !password){
+        res.json({msg:"You need to provide <user> and <password> params"})
+    }
+    if (user==="miryam" && password==="123"){
+        res.json({msg: "Sign in succesfully"})
+        return
+    }res.status(404).json({msg: "Wrong user or password"})
+})
+
+
 app.post('/',(req, res)=>{
     res.json({msg: "Hello POST, I'm Miryam"})
 })
 
-app.put('/',(req, res)=>{
+app.put('/',(req, res)=>{ 
     res.json({msg: "Hello PUT, I'm Miryam"})
 })
 
