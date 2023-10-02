@@ -1,1 +1,10 @@
 Desestructuracion 
+Segmentos o PARAMS http://localhost:3000/login/miryam/123  info corta y no sensible
+
+QUERY   http://localhost:3000/login?user=miryam&password=123 mas informacion y datos no sensibles
+
+BODY    http://localhost:3000/login/  json = los datos van dentro del paquete con mucha informacion y datos sensibles
+
+
+LOGIN -- CRUD
+CREATE, READ, UPDATE, DELETE
